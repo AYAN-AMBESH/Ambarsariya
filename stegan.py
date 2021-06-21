@@ -4,14 +4,6 @@ import bitarray
 import sys
 import numpy as np
 
-def listToString(s): 
-    
-    str1 = "" 
-    ele=''
-    for ele in s: 
-        str1 += str(ele)
-    return str1 
-
 file=input("ENTER FILE NAME: ")
 if os.path.exists(file):
     if (len(file)==0):
