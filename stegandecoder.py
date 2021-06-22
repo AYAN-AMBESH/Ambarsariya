@@ -1,6 +1,6 @@
 from PIL import Image
 import numpy as np
-import binascii
+
 imagepath=input("Enter image path: ")
 image = Image.open(imagepath)
 
