@@ -31,6 +31,7 @@ for x in range(73):
         elif b==255:
             extracted+='1'    
 
+
 chars = []
 for i in range(len(extracted)//8):
     byte = extracted[i*8:(i+1)*8]
