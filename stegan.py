@@ -21,10 +21,28 @@ byt=bytes(stryng,encoding='utf-8')
 b = bitarray.bitarray()
 b.frombytes(byt)
 bit_array=[int(i) for i in b]
-imagepath= input("Enter image path: ")
-image=Image.open(imagepath)
-img = np.array(image)
 
+imagepath= input("Enter image path: ")
+if os.path.exists(imagepath):
+    image=Image.open(imagepath)
+    img = np.array(image)
+else:
+    print("File path invalid xD")
+    sys.exit()
+
+outpath = input("Enter output path: ")
+
+if not os.path.isabs(outpath):
+    outpath = os.path.abspath(outpath)
+elif not os.path.exists(os.path.dirname(outpath)):
+    print("File path invalid xD")
+    sys.exit()
+elif os.path.isdir(outpath):
+    outpath += 'lsb.png'
+    
+if not outpath[-4:] == '.png':
+    outpath += '.png'
+    
 img.setflags(write=1)
 i=0
 for x in range(len(img)):
@@ -61,4 +79,4 @@ for x in range(len(img)):
     
 image=Image.fromarray(np.uint8(img))
 
-image.save('lsb.png')
+image.save(outpath)
