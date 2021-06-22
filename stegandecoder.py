@@ -4,8 +4,20 @@ import os
 import sys
 
 def stegdecode():
-    imagepath=input("Enter image path: ")
-    image = Image.open(imagepath)
+    
+    colors = {
+    'error':'\033[31;1m[x] ',
+    'msg':'\033[36;1m ',
+    'success':'\033[33;1m ',
+    'white':'\033[37;1m '
+    }
+    
+    imagepath=input(colors['white'] + "Enter image path: ")
+    if os.path.exists(imagepath):
+        image = Image.open(imagepath)
+    else:
+        print(colors['error'] + 'File path invalid xD')
+        sys.exit()
 
 
     extracted= ''
@@ -39,4 +51,4 @@ def stegdecode():
     for i in range(len(extracted)//8):
         byte = extracted[i*8:(i+1)*8]
         chars.append(chr(int(''.join([str(bit) for bit in byte]), 2)))
-    print(chars[2:-2])
+    print('\n' + colors['success'] + ''.join(chars[2:-2]))
