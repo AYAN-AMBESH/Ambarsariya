@@ -1,5 +1,7 @@
 from PIL import Image
 import numpy as np
+import os
+import sys
 
 def stegdecode():
     imagepath=input("Enter image path: ")
