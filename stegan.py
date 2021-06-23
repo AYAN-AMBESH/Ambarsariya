@@ -5,7 +5,15 @@ import sys
 import numpy as np
 
 def stegencode():
-    file=input("ENTER FILE NAME: ")
+
+    colors = {
+    'error':'\033[31;1m[x] ',
+    'msg':'\033[36;1m ',
+    'success':'\033[33;1m ',
+    'white':'\033[37;1m '
+    }
+    
+    file=input(colors['white'] + "ENTER FILE NAME: ")
     if os.path.exists(file):
         if (len(file)==0):
             raise ValueError("File is empty")    
@@ -14,7 +22,7 @@ def stegencode():
             y=len(file)
 
     else:
-        print("File path invalid xD")
+        print(colors['error'] + "File path invalid xD")
         sys.exit()
         
     stryng=str(String_of_File)
@@ -23,22 +31,20 @@ def stegencode():
     b.frombytes(byt)
     bit_array=[int(i) for i in b]
 
-    imagepath= input("Enter image path: ")
+    imagepath= input(colors['white'] + "Enter image path: ")
     if os.path.exists(imagepath):
         image=Image.open(imagepath)
         img = np.array(image)
-        print(img)
-        print(image)
     else:
-        print("File path invalid xD")
+        print(colors['error'] + "File path invalid xD")
         sys.exit()
 
-    outpath = input("Enter output path: ")
+    outpath = input(colors['white'] + "Enter output path: ")
 
     if not os.path.isabs(outpath):
         outpath = os.path.abspath(outpath)
     elif not os.path.exists(os.path.dirname(outpath)):
-        print("File path invalid xD")
+        print(colors['error'] + "File path invalid xD")
         sys.exit()
     elif os.path.isdir(outpath):
         outpath += 'lsb.png'
@@ -83,3 +89,4 @@ def stegencode():
     image=Image.fromarray(np.uint8(img))
 
     image.save(outpath)
+    print('\n' + colors['success'] + 'File saved to: ' + outpath)
