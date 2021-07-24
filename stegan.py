@@ -5,35 +5,34 @@ import sys
 import numpy as np
 
 def stegencode():
-
     colors = {
-    'error':'\033[31;1m[x] ',
-    'msg':'\033[36;1m ',
-    'success':'\033[33;1m ',
-    'white':'\033[37;1m '
+        'error': '\033[31;1m[x] ',
+        'msg': '\033[36;1m ',
+        'success': '\033[33;1m ',
+        'white': '\033[37;1m '
     }
-    
-    file=input(colors['white'] + "ENTER FILE NAME: ")
+
+    file = input(colors['white'] + "ENTER FILE NAME: ")
     if os.path.exists(file):
-        if (len(file)==0):
-            raise ValueError("File is empty")    
-        with open(file,'r') as f:
-            String_of_File=f.readlines()
-            y=len(file)
+        if (len(file) == 0):
+            raise ValueError("File is empty")
+        with open(file, 'r') as f:
+            String_of_File = f.readlines()
+            y = len(file)
 
     else:
         print(colors['error'] + "File path invalid xD")
         sys.exit()
-        
-    stryng=str(String_of_File)
-    byt=bytes(stryng,encoding='utf-8')
+
+    stryng = str(String_of_File)
+    byt = bytes(stryng, encoding='utf-8')
     b = bitarray.bitarray()
     b.frombytes(byt)
-    bit_array=[int(i) for i in b]
+    bit_array = [int(i) for i in b]
 
-    imagepath= input(colors['white'] + "Enter image path: ")
+    imagepath = input(colors['white'] + "Enter image path: ")
     if os.path.exists(imagepath):
-        image=Image.open(imagepath)
+        image = Image.open(imagepath)
         img = np.array(image)
     else:
         print(colors['error'] + "File path invalid xD")
@@ -48,45 +47,43 @@ def stegencode():
         sys.exit()
     elif os.path.isdir(outpath):
         outpath += 'lsb.png'
-        
+
     if not outpath[-4:] == '.png':
         outpath += '.png'
-        
+
     img.setflags(write=1)
-    i=0
+    i = 0
     for x in range(len(img)):
-        r,g,b=img[x,0]
-        
+        r, g, b = img[x, 0]
+
         new_bit_red_pixel = 255
         new_bit_green_pixel = 255
         new_bit_blue_pixel = 255
 
-        if i<len(bit_array):
+        if i < len(bit_array):
             r_bit = bin(r)
             r_last_bit = int(r_bit[-1])
             r_new_last_bit = r_last_bit & bit_array[i]
-            new_bit_red_pixel = int(r_bit[:-1]+str(r_new_last_bit),2)
+            new_bit_red_pixel = int(r_bit[:-1] + str(r_new_last_bit), 2)
             i += 1
 
-        if i<len(bit_array):
+        if i < len(bit_array):
             g_bit = bin(g)
             g_last_bit = int(g_bit[-1])
             g_new_last_bit = g_last_bit & bit_array[i]
-            new_bit_green_pixel = int(g_bit[:-1]+str(g_new_last_bit),2)
+            new_bit_green_pixel = int(g_bit[:-1] + str(g_new_last_bit), 2)
             i += 1
 
-        if i<len(bit_array):
+        if i < len(bit_array):
             b_bit = bin(b)
             b_last_bit = int(b_bit[-1])
             b_new_last_bit = b_last_bit & bit_array[i]
-            new_bit_blue_pixel = int(b_bit[:-1]+str(b_new_last_bit),2)
+            new_bit_blue_pixel = int(b_bit[:-1] + str(b_new_last_bit), 2)
             i += 1
 
-        img[x,0] = (new_bit_red_pixel,new_bit_green_pixel,new_bit_blue_pixel)
-        
+        img[x, 0] = (new_bit_red_pixel, new_bit_green_pixel, new_bit_blue_pixel)
 
-        
-    image=Image.fromarray(np.uint8(img))
+    image = Image.fromarray(np.uint8(img))
 
     image.save(outpath)
     print('\n' + colors['success'] + 'File saved to: ' + outpath)
