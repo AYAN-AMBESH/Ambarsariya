@@ -4,86 +4,107 @@ import bitarray
 import sys
 import numpy as np
 
-def stegencode():
-    colors = {
-        'error': '\033[31;1m[x] ',
-        'msg': '\033[36;1m ',
-        'success': '\033[33;1m ',
-        'white': '\033[37;1m '
-    }
+def getcolours():
+    return  {
+            'error':'\033[31;1m[x] ',
+            'msg':'\033[36;1m ',
+            'success':'\033[33;1m ',
+            'white':'\033[37;1m '
+            }
 
-    file = input(colors['white'] + "ENTER FILE NAME: ")
+def textfilereader(file):
+    colors=getcolours()
     if os.path.exists(file):
-        if (len(file) == 0):
-            raise ValueError("File is empty")
-        with open(file, 'r') as f:
-            String_of_File = f.readlines()
-            y = len(file)
-
+        if (len(file)==0):
+            raise ValueError("File is empty")    
+        with open(file,'r') as f:
+            return f.readlines()
+            
     else:
         print(colors['error'] + "File path invalid xD")
         sys.exit()
 
-    stryng = str(String_of_File)
-    byt = bytes(stryng, encoding='utf-8')
+def imagereader(imagepath):
+    colors=getcolours()
+    if os.path.exists(imagepath):
+        image=Image.open(imagepath)
+        return np.array(image)
+    else:
+        print(colors['error'] + "File path invalid xD")
+        sys.exit()
+
+def stringstobit(sfile):
+    stryng=str(sfile)
+    byt=bytes(stryng,encoding='utf-8')
     b = bitarray.bitarray()
     b.frombytes(byt)
-    bit_array = [int(i) for i in b]
+    return [int(i) for i in b]
+    
 
-    imagepath = input(colors['white'] + "Enter image path: ")
-    if os.path.exists(imagepath):
-        image = Image.open(imagepath)
-        img = np.array(image)
-    else:
-        print(colors['error'] + "File path invalid xD")
-        sys.exit()
-
-    outpath = input(colors['white'] + "Enter output path: ")
-
+def filewriter(outpath):
+    colors=getcolours()
     if not os.path.isabs(outpath):
         outpath = os.path.abspath(outpath)
     elif not os.path.exists(os.path.dirname(outpath)):
         print(colors['error'] + "File path invalid xD")
         sys.exit()
     elif os.path.isdir(outpath):
-        outpath += 'lsb.png'
-
+        return 'lsb.png'
+        
     if not outpath[-4:] == '.png':
-        outpath += '.png'
+        return '.png'
 
+def encoder(r,bit_array,i):
+    bit = bin(r)
+    lastbit = int(bit[-1])
+    newlbit = lastbit & bit_array[i]
+    return int(bit[:-1]+str(newlbit),2)
+
+
+def stegencode():
+
+    colors= getcolours()
+
+    file=input(colors['white'] + "ENTER FILE NAME: ")
+    
+    sfile=textfilereader(file)
+    
+    bit_array=stringstobit(sfile)
+
+    imagepath= input(colors['white'] + "Enter image path: ")
+
+    img=imagereader(imagepath)
+
+    outpath = input(colors['white'] + "Enter output path: ")
+
+    opath=filewriter(outpath)
+        
     img.setflags(write=1)
-    i = 0
+    i=0
     for x in range(len(img)):
-        r, g, b = img[x, 0]
+        r,g,b=img[x,0]
+        
+        nbrpixel = 255
+        nbgpixel = 255
+        nbbpixel = 255
 
-        new_bit_red_pixel = 255
-        new_bit_green_pixel = 255
-        new_bit_blue_pixel = 255
-
-        if i < len(bit_array):
-            r_bit = bin(r)
-            r_last_bit = int(r_bit[-1])
-            r_new_last_bit = r_last_bit & bit_array[i]
-            new_bit_red_pixel = int(r_bit[:-1] + str(r_new_last_bit), 2)
+        if i<len(bit_array):       
+            nbrpixel = encoder(r,bit_array,i)
             i += 1
 
-        if i < len(bit_array):
-            g_bit = bin(g)
-            g_last_bit = int(g_bit[-1])
-            g_new_last_bit = g_last_bit & bit_array[i]
-            new_bit_green_pixel = int(g_bit[:-1] + str(g_new_last_bit), 2)
+        if i<len(bit_array):
+            nbgpixel = encoder(g,bit_array,i)
             i += 1
 
-        if i < len(bit_array):
-            b_bit = bin(b)
-            b_last_bit = int(b_bit[-1])
-            b_new_last_bit = b_last_bit & bit_array[i]
-            new_bit_blue_pixel = int(b_bit[:-1] + str(b_new_last_bit), 2)
+        if i<len(bit_array):
+            nbbpixel = encoder(b,bit_array,i)
             i += 1
 
-        img[x, 0] = (new_bit_red_pixel, new_bit_green_pixel, new_bit_blue_pixel)
+        img[x,0] = (nbrpixel,nbgpixel,nbbpixel)
+        
 
-    image = Image.fromarray(np.uint8(img))
+        
+    image=Image.fromarray(np.uint8(img))
 
-    image.save(outpath)
-    print('\n' + colors['success'] + 'File saved to: ' + outpath)
+    image.save(opath)
+    print('\n' + colors['success'] + 'File saved to: ' + opath)
