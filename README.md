@@ -6,8 +6,8 @@ The algorithm uses bitwise operation on the binary value of text file and binary
 ## Installation 
 
 #### Downloading and installing steps:
-git clone the repository on your system: `git clone https://github.com/AYAN-AMBESH/Ambarsariya.git `
-install the requirements on your system: `pip install -r requirements.txt`
+git clone the repository on your system: `git clone https://github.com/AYAN-AMBESH/Ambarsariya.git`.
+install the requirements on your system: `pip install -r requirements.txt`.
 
 
 ## Usage and Commands
