@@ -6,8 +6,8 @@ The algorithm uses bitwise operation on the binary value of text file and binary
 ## Installation 
 
 #### Downloading and installing steps:
-git clone the repository on your system: `git clone https://github.com/AYAN-AMBESH/Ambarsariya.git`.
-install the requirements on your system: `pip install -r requirements.txt`.
+1. git clone the repository on your system: `git clone https://github.com/AYAN-AMBESH/Ambarsariya.git`.
+2. install the requirements on your system: `pip install -r requirements.txt`.
 
 
 ## Usage and Commands
@@ -17,6 +17,10 @@ Commands used:
 1. `python ambarsariya.py -h` for help menu.
 2. `python ambarsariya.py -e` for encoding a text file inside an image.
 3. `python ambarsariya.py -d` for decoding the message from image.
+
+
+## Input and output files:
+It takes input as text file and a image file and it gives output an image file with an encoded message inside.
 
 
 ## Limitations
