@@ -49,10 +49,12 @@ def filewriter(outpath):
         print(colors['error'] + "File path invalid xD")
         sys.exit()
     elif os.path.isdir(outpath):
-        return 'lsb.png'
+        outpath +='lsb.png'
+        return outpath
         
     if not outpath[-4:] == '.png':
-        return '.png'
+        outpath += '.png'
+        return outpath
 
 def encoder(r,bit_array,i):
     bit = bin(r)
