@@ -29,22 +29,19 @@ def stegdecode():
         pixel=r,g,b
         
         if i<216:
-            if r==254:
-                extracted+='0'
-            elif r==255:
-                extracted+='1'    
+            rbit=bin(r)
+            rlbit=rbit[-1]
+            extracted+=str(rlbit)   
 
         if i<216:
-            if g==254:
-                extracted+='0'
-            elif g==255:
-                extracted+='1'    
+            gbit=bin(g)
+            glbit=gbit[-1]
+            extracted+=str(glbit)    
 
         if i<216:
-            if b==254:
-                extracted+='0'
-            elif b==255:
-                extracted+='1'    
+            bbit=bin(b)
+            blbit=bbit[-1]
+            extracted+=str(blbit)    
 
 
     chars = []
