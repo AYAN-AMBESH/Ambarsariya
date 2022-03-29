@@ -86,9 +86,9 @@ def stegencode():
     for x in range(len(img)):
         r,g,b=img[x,0]
         
-        nbrpixel = 255
-        nbgpixel = 255
-        nbbpixel = 255
+        nbrpixel = r
+        nbgpixel = g
+        nbbpixel = b
 
         if i<len(bit_array):       
             nbrpixel = encoder(r,bit_array,i)
