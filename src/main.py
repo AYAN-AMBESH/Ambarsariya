@@ -1,10 +1,9 @@
 import os
 import sys
-import stegan
-import stegandecoder
+from src import stegan
+from src import stegandecoder
 
-if __name__ == '__main__':
-
+def main():
     colors = {
     'error':'\033[31;1m[x] ',
     'msg':'\033[36;1m ',
