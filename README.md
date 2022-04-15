@@ -1,3 +1,12 @@
+
+          ░█████╗░███╗░░░███╗██████╗░░█████╗░██████╗░░██████╗░█████╗░██████╗░██╗██╗░░░██╗░█████╗░
+          ██╔══██╗████╗░████║██╔══██╗██╔══██╗██╔══██╗██╔════╝██╔══██╗██╔══██╗██║╚██╗░██╔╝██╔══██╗
+          ███████║██╔████╔██║██████╦╝███████║██████╔╝╚█████╗░███████║██████╔╝██║░╚████╔╝░███████║
+          ██╔══██║██║╚██╔╝██║██╔══██╗██╔══██║██╔══██╗░╚═══██╗██╔══██║██╔══██╗██║░░╚██╔╝░░██╔══██║
+          ██║░░██║██║░╚═╝░██║██████╦╝██║░░██║██║░░██║██████╔╝██║░░██║██║░░██║██║░░░██║░░░██║░░██║
+          ╚═╝░░╚═╝╚═╝░░░░░╚═╝╚═════╝░╚═╝░░╚═╝╚═╝░░╚═╝╚═════╝░╚═╝░░╚═╝╚═╝░░╚═╝╚═╝░░░╚═╝░░░╚═╝░░╚═╝
+
+
 ## About
 **Ambarsariya** is a project on **stegnography** based upon **LSB(least significant bit)** algorithm.
 The algorithm uses bitwise operation on the binary value of text file and binary values of RGB pixels of image.
@@ -6,7 +15,7 @@ The algorithm uses bitwise operation on the binary value of text file and binary
 ## Installation 
 
 #### Downloading and installing steps:
-1. git clone the repository on your system: `git clone https://github.com/AYAN-AMBESH/Ambarsariya.git`.
+1. clone the repository on your system: `git clone https://github.com/AYAN-AMBESH/Ambarsariya.git`.
 2. install the requirements on your system: `pip install -r requirements.txt`.
 
 
@@ -19,12 +28,12 @@ Commands used:
 3. `python ambarsariya.py -d` for decoding the message from image.
 
 
-## Input and output files:
-It takes input as text file and a image file and it gives output an image file with an encoded message inside.
+## Input files
+- [x] Text file
+- [x] Image
 
+## Output files
+- [x] Stego image
 
-## Limitations
-1. The program can only be used with an non transparent png image.
-2. The text message to be encoded inside the image should not be more than 23 bytes.
 
 
