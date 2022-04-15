@@ -1,6 +1,6 @@
 import os
 import sys
-from src import stegan
+from src import steganencoder
 from src import stegandecoder
 
 def main():
@@ -20,7 +20,7 @@ def main():
     ██║░░██║██║░╚═╝░██║██████╦╝██║░░██║██║░░██║██████╔╝██║░░██║██║░░██║██║░░░██║░░░██║░░██║
     ╚═╝░░╚═╝╚═╝░░░░░╚═╝╚═════╝░╚═╝░░╚═╝╚═╝░░╚═╝╚═════╝░╚═╝░░╚═╝╚═╝░░╚═╝╚═╝░░░╚═╝░░░╚═╝░░╚═╝
 
-    By Ayan Ambesh (ambesh12k@gmail.com)
+                                                        By Ayan Ambesh (ambesh12k@gmail.com)
     ''')
 
     if '-d' in sys.argv and '-e' in sys.argv:
@@ -31,7 +31,7 @@ def main():
         stegandecoder.stegdecode()
         
     elif '-e' in sys.argv:
-        stegan.stegencode()
+        steganencoder.stegencode()
 
     elif '-h' in sys.argv:
         print(colors['white'] + 'Usage:\n -e to embed\n -d to decode\n\n Example: python3 ambarsariya.py -e')
@@ -39,3 +39,6 @@ def main():
     else:
         print(colors['error'] + 'No valid option specified\nBye!')
         sys.exit()
+
+if __name__=="__main__":
+    main()
