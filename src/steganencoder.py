@@ -101,25 +101,23 @@ def stegencode():
     img.setflags(write=True)
     i = 0
     for x in range(len(img)):
-        r, g, b = img[x, 0]
-
+        r,g,b,a=img[x,0]
+        
         nbrpixel = r
         nbgpixel = g
         nbbpixel = b
+        if a ==0:
+            nbapixel = 2
+        else:
+            nbapixel = a
 
-        if i < len(bit_array):
-            nbrpixel = encoder(r, bit_array, i)
+        # print(a,end='')
+        if i<len(bit_array):       
+            napixel = encoder(nbapixel,bit_array,i)
             i += 1
-
-        if i < len(bit_array):
-            nbgpixel = encoder(g, bit_array, i)
-            i += 1
-
-        if i < len(bit_array):
-            nbbpixel = encoder(b, bit_array, i)
-            i += 1
-
-        img[x, 0] = (nbrpixel, nbgpixel, nbbpixel)
+            img[x,0] = (nbrpixel,nbgpixel,nbbpixel,napixel)        
+            if img[x,0][3] == 0:
+                img[x,0][3]=nbapixel
 
     image = Image.fromarray(np.uint8(img))
 

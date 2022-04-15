@@ -23,24 +23,14 @@ def stegdecode():
 
     i = 0
     img = np.array(image)
-    for x in range(73):
-        r, g, b = img[x, 0]
-        pixel = r, g, b
-
-        if i < 216:
-            rbit = bin(r)
-            rlbit = rbit[-1]
-            extracted += str(rlbit)
-
-        if i < 216:
-            gbit = bin(g)
-            glbit = gbit[-1]
-            extracted += str(glbit)
-
-        if i < 216:
-            bbit = bin(b)
-            blbit = bbit[-1]
-            extracted += str(blbit)
+    for x in range(len(img)):
+        r,g,b,a=img[x,0]
+        # print(a,end='')
+        if i <456:# this value is len of bit array, if you change your text in abc.txt then change accordingly the length of bit array here
+            rbit=bin(a)
+            rlbit=rbit[-1]
+            extracted+=str(rlbit)   
+            i+=1
 
     chars = []
     for i in range(len(extracted) // 8):
