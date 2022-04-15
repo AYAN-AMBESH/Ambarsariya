@@ -1,7 +1,7 @@
 import os
 import sys
-from src import steganencoder
-from src import stegandecoder
+import steganencoder
+import stegandecoder
 
 def main():
     colors = {

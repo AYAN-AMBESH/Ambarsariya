@@ -26,7 +26,8 @@ def stegdecode():
     for x in range(len(img)):
         r,g,b,a=img[x,0]
         # print(a,end='')
-        if i <456:# this value is len of bit array, if you change your text in abc.txt then change accordingly the length of bit array here
+        if i <456:
+        #(i<456) where 456 is len of bit array, if you change your text in abc.txt then change accordingly the length of bit array here
             rbit=bin(a)
             rlbit=rbit[-1]
             extracted+=str(rlbit)   
