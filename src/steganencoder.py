@@ -91,7 +91,7 @@ def stegencode():
 
     bit_array = strings_to_bit(sfile)
     # bit_array = list of 0s and 1s based on sfile's content in 8 bit representation
-    print(bit_array)
+    print("length of bit array ="+ len(bit_array))
     image_path = input(f"\n{colors['white']}Enter Image Path: ")
     img = image_reader(image_path)
 
@@ -106,7 +106,7 @@ def stegencode():
         nbrpixel = r
         nbgpixel = g
         nbbpixel = b
-        nbapixel = 3
+        nbapixel = 1
 
         # print(a,end='')
         if i<len(bit_array):       

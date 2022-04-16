@@ -37,4 +37,4 @@ def stegdecode():
     for i in range(len(extracted) // 8):
         byte = extracted[i * 8:(i + 1) * 8]
         chars.append(chr(int(''.join([str(bit) for bit in byte]), 2)))
-    print('\n' + colors['success'] + ''.join(chars[2:-2]))
+    print('\n' + colors['success'] + ''.join(chars[:-2]))
