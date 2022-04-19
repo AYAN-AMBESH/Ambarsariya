@@ -1,7 +1,6 @@
-from PIL import Image
-import numpy as np
-import os
-import sys
+from PIL import Image   # accessing pixel description
+import numpy as np      # using array being faster than list
+import os               # for verifying the path of files
 
 
 def stegdecode():
@@ -17,24 +16,27 @@ def stegdecode():
         image = Image.open(imagepath)
     else:
         print(colors['error'] + 'File path invalid xD')
-        sys.exit()
+        exit()
 
     extracted = ''
+    n = int(input("Enter length of message: "))  # Enter the length of the message
 
-    i = 0
     img = np.array(image)
     for x in range(len(img)):
-        r,g,b,a=img[x,0]
+        r, g, b, a = img[x, 0]
         # print(a,end='')
-        if i <456:
-        #(i<456) where 456 is len of bit array, if you change your text in abc.txt then change accordingly the length of bit array here
-            rbit=bin(a)
-            rlbit=rbit[-1]
-            extracted+=str(rlbit)   
-            i+=1
 
-    chars = []
+        if x < (n*8):
+            rbit = bin(a)
+            rlbit = rbit[-1]
+            extracted += str(rlbit)
+            continue
+        break
+
+    chars = ''
     for i in range(len(extracted) // 8):
         byte = extracted[i * 8:(i + 1) * 8]
-        chars.append(chr(int(''.join([str(bit) for bit in byte]), 2)))
-    print('\n' + colors['success'] + ''.join(chars[:-2]))
+        # slicing the string extracted from i*8 to (i+1)*8
+        chars += chr(int(byte, base=2))
+
+    print('\n' + colors['success'] + chars)
